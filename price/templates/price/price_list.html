@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+  <h1> supsup</h1>
+
+  {% for price in prices %}
+  <ul class="priceul">
+    <li> name:: {{ price.name }}</li>
+    <li> price:: {{ price.price }}</li>
+    <li> author:: {{ price.author }} </li>
+  </ul>
+
+
+
+  {% endfor %}
+
+
+{% endblock content %}
