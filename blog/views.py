@@ -50,5 +50,7 @@ def blog_post_delete_view(request, slug):
 	obj= get_object_or_404(BlogPost, slug=slug)
 	form= BlogPostModelForm(request.POST or None)
 	template_name= 'blog/delete.html'
+	if request.method == "POST":
+		obj.delete()
 	context={'object': obj}
 	return render(request, template_name, context)

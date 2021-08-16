@@ -6,7 +6,7 @@
 
   {% for price in prices %}
   <ul class="priceul">
-    <li> name:: {{ price.name }}</li>
+    <li><a href=" {% url 'price_detail' price.id %} "> name:: {{ price.name }}</a></li>
     <li> price:: {{ price.price }}</li>
     <li> author:: {{ price.author }} </li>
   </ul>

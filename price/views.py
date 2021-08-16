@@ -34,10 +34,23 @@ def price_detail(request, id):
 	context= {'object': obj}
 	return render(request, 'price/price_detail.html', context)
 
+@staff_member_required
 def price_update(request, id):
+	#Look up the object
 	obj= get_object_or_404(Price, id=id)
-	#NOWWWWWWWWWWW
-	return
+	#instance= obj need to pass the instance to form in order to update
+	form= PriceForm(request.POST or None, instance= obj)
+	if form.is_valid():
+		form.save()
+	context={'form': form, "name": f"Update {obj.name}"}
+	return render(request, 'price/price_create.html', context )
 
-def price_delete(request):
-	return		
+@staff_member_required
+def price_delete(request, id):
+	obj= get_object_or_404(Price, id=id)
+	form= PriceForm(request.POST or None)
+	if request.method == 'POST':
+		obj.delete()
+		return redirect('price_list')
+	context= {'object': obj}
+	return render(request, 'price/price_delete.html', context)		
