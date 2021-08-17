@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class PriceQuerySet(models.Manager):
+	def maxtomin(self):
+		return self.get_queryset().filter()
+
 # Create your models here.
 class Price(models.Model):
 	name= models.CharField(max_length=50)
