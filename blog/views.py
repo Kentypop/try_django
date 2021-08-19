@@ -11,6 +11,10 @@ def blog_post_list_view(request):
 	#List out objects
 	#Could be search
 	qs= BlogPost.objects.all().published()
+	if request.user.is_authenticated:
+		my_qs= BlogPost.objects.filter(user=request.user)
+		# ppe to combine queryset of the same class, distinct make sure it dont show duplicates
+		qs= (qs | my_qs).distinct()
 	template_name= 'blog/list.html'
 	context= {'object_list': qs}
 	return render(request, template_name, context)

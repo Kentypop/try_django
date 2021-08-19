@@ -9,7 +9,9 @@ from django.contrib.auth.models import User
 def price_list_view(request):
 	#List out all price 
 	context={
-		'prices': Price.objects.all()
+		#This is one way to sort, but lets use model manager
+		#'prices': Price.objects.all().order_by('-price')
+		'prices': Price.objects.all().maxtomin()
 	}
 	return render(request, 'price/price_list.html', context)
 
